@@ -76,6 +76,19 @@ it('get', () => {
   expect(
     get(
       {
+        A1: { t: 'n', v: 0 },
+        '!merges': [{ s: { r: 0, c: 0 }, e: { r: 0, c: 1 } }],
+      },
+      { r: 0, c: 0 },
+    ),
+  ).toEqual({
+    meta: { type: 'HERO', address: { r: 0, c: 0 } },
+    type: 'number',
+    value: 0,
+  })
+  expect(
+    get(
+      {
         B1: { t: 'n', v: 0 },
         '!merges': [{ s: { r: 0, c: 0 }, e: { r: 0, c: 1 } }],
       },

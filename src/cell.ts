@@ -8,7 +8,7 @@ import { CellAddress, CellObject, Range, utils, WorkSheet } from 'xlsx'
  * */
 export type CellMeta = Readonly<{
   address: CellAddress
-  type: 'DIRECT' | 'MERGED'
+  type: 'DIRECT' | 'MERGED' | 'HERO'
 }>
 
 /**
@@ -98,11 +98,12 @@ export const get = (
   address: CellAddress,
 ): Nullable<Cell> => {
   const go = (address: CellAddress, type: CellMeta['type']): Nullable<Cell> => {
-    const raw: CellObject | undefined = worksheet[utils.encode_cell(address)]
-    if (isNonNullable(raw)) return normalize(raw, address, type)
-    if (type === 'MERGED') return // Not the hero of the merge
-
     const scope = (worksheet['!merges'] ?? []).find(contains(address))
+
+    const raw: CellObject | undefined = worksheet[utils.encode_cell(address)]
+    if (isNonNullable(raw))
+      return normalize(raw, address, isNullable(scope) ? type : 'HERO')
+    if (type === 'MERGED') return // Not the hero of the merge
     if (isNullable(scope)) return // Not in any merge
 
     const hero = iterate(scope).findMap(address => go(address, 'MERGED'))
