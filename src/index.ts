@@ -1,1 +1,1 @@
-import '@equt/prelude'
+export { get } from './cell'
