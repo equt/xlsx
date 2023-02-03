@@ -4,7 +4,7 @@ specifiers:
   '@commitlint/cli': ^17.4.2
   '@commitlint/config-conventional': ^17.4.2
   '@equt/eslint-config': ^8.9.0
-  '@equt/prelude': ^0.1.11
+  '@equt/prelude': ^0.1.12
   '@equt/prettier-config': ^2.5.1
   '@equt/tsconfig': ^1.3.1
   '@types/jest': ^29.4.0
@@ -24,7 +24,7 @@ devDependencies:
   '@commitlint/cli': 17.4.2
   '@commitlint/config-conventional': 17.4.2
   '@equt/eslint-config': 8.9.0_4vsywjlpuriuw3tl5oq6zy5a64
-  '@equt/prelude': 0.1.11
+  '@equt/prelude': 0.1.12
   '@equt/prettier-config': 2.5.1_prettier@2.8.3
   '@equt/tsconfig': 1.3.1
   '@types/jest': 29.4.0
@@ -583,8 +583,8 @@ packages:
       - supports-color
     dev: true
 
-  /@equt/prelude/0.1.11:
-    resolution: {integrity: sha512-FX2lmVK2ShrhdOUBGcGmPDr7LOBDPbqQYmC9iw6l3Iq3xUuYtTsvscpR+OQgOPj08+mEqEpUbAuYMLGkdL3fZA==}
+  /@equt/prelude/0.1.12:
+    resolution: {integrity: sha512-Ci8jm/qKi+BBoQTsXpQDwYCotuXvXDd0OVvRVCOgJ4VKh0atwMWY7a+uZMO+XSMnb1oDaFbf2FbXZykv6XfkXQ==}
     dev: true
 
   /@equt/prettier-config/2.5.1_prettier@2.8.3:

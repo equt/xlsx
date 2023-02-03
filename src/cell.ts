@@ -6,10 +6,16 @@ import { CellAddress, CellObject, Range, utils, WorkSheet } from 'xlsx'
  * - `address` will always be the real {@link CellAddress}, even for a merged cell
  *   - `type` indicates if the cell value is retrieved from the the hero of the merged cells
  * */
-export type CellMeta = Readonly<{
-  address: CellAddress
-  type: 'DIRECT' | 'MERGED' | 'HERO'
-}>
+export type CellMeta = Readonly<
+  {
+    address: CellAddress
+  } & (
+    | {
+        type: 'DIRECT'
+      }
+    | { type: 'HERO' | 'MERGED'; range: Range }
+  )
+>
 
 /**
  * Intermediate cell type
@@ -37,30 +43,26 @@ export type Cell = Readonly<
   )
 >
 
-const normalize = (
-  raw: CellObject,
-  address: CellAddress,
-  type: CellMeta['type'],
-): Nullable<Cell> => {
+const normalize = (raw: CellObject, meta: CellMeta): Nullable<Cell> => {
   // For my personal use case, I never parse the formula
   if (isNullable(raw.v) || raw.t === 'e' || raw.t === 'z') return undefined
 
   switch (raw.t) {
     case 's':
-      return { type: 'string', value: raw.v as string, meta: { address, type } }
+      return { type: 'string', value: raw.v as string, meta }
     case 'n':
-      return { type: 'number', value: raw.v as number, meta: { address, type } }
+      return { type: 'number', value: raw.v as number, meta }
     case 'b':
       return {
         type: 'boolean',
         value: raw.v as boolean,
-        meta: { address, type },
+        meta,
       }
     case 'd':
       return {
         type: 'date',
         value: raw.v as Date,
-        meta: { address, type },
+        meta,
       }
   }
 }
@@ -102,13 +104,18 @@ export const get = (
 
     const raw: CellObject | undefined = worksheet[utils.encode_cell(address)]
     if (isNonNullable(raw))
-      return normalize(raw, address, isNullable(scope) ? type : 'HERO')
+      return normalize(
+        raw,
+        isNonNullable(scope)
+          ? { type: 'HERO', address, range: scope }
+          : { type: 'DIRECT', address },
+      )
     if (type === 'MERGED') return // Not the hero of the merge
     if (isNullable(scope)) return // Not in any merge
 
     const hero = iterate(scope).findMap(address => go(address, 'MERGED'))
     if (isNullable(hero)) return // Umm, no hero in the merge?
-    return { ...hero, meta: { type: 'MERGED', address } }
+    return { ...hero, meta: { type: 'MERGED', address, range: scope } }
   }
 
   return go(address, 'DIRECT')

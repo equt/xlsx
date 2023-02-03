@@ -82,7 +82,11 @@ it('get', () => {
       { r: 0, c: 0 },
     ),
   ).toEqual({
-    meta: { type: 'HERO', address: { r: 0, c: 0 } },
+    meta: {
+      type: 'HERO',
+      address: { r: 0, c: 0 },
+      range: { s: { r: 0, c: 0 }, e: { r: 0, c: 1 } },
+    },
     type: 'number',
     value: 0,
   })
@@ -95,7 +99,11 @@ it('get', () => {
       { r: 0, c: 0 },
     ),
   ).toEqual({
-    meta: { type: 'MERGED', address: { r: 0, c: 0 } },
+    meta: {
+      type: 'MERGED',
+      address: { r: 0, c: 0 },
+      range: { s: { r: 0, c: 0 }, e: { r: 0, c: 1 } },
+    },
     type: 'number',
     value: 0,
   })
