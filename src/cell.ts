@@ -105,9 +105,7 @@ export const get = (
     const scope = (worksheet['!merges'] ?? []).find(contains(address))
     if (isNullable(scope)) return // Not in any merge
 
-    const hero = iterate(scope)
-      .map(address => go(address, 'MERGED'))
-      .find(isNonNullable)
+    const hero = iterate(scope).findMap(address => go(address, 'MERGED'))
     if (isNullable(hero)) return // Umm, no hero in the merge?
     return { ...hero, meta: { type: 'MERGED', address } }
   }
