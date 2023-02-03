@@ -1,8 +1,32 @@
 import { Range, WorkSheet, utils } from 'xlsx'
 import { Cell, get, iterate } from './cell'
 
+/**
+ * Headers represents a list of header from left to right.
+ *
+ * For more details, see the {@link head} function
+ * */
 export type Headers = ReadonlyArray<ReadonlyNonEmptyArray<Cell>>
 
+/**
+ * Detect a possible header within the `restriction`
+ *
+ * This function comes with a few assumptions to make the task a little bit easier.
+ *
+ * - Each row represent one record, and every column describes an aspect of it
+ * - The header starts at the first non-empty row, with the merged cells taken into account
+ * - The header ends when all cross-columns headers resolved into individual ones
+ *
+ * A cell not in any merged cells will resolve to itself, without any further detection.
+ * A multi-rows cell will behave exactly the same as the standalone cell. Cross-columns
+ * header is resolved by recursively looking below to see until there is a single,
+ * non-empty cell, and the reslt header will be an array of cells instead one single cell.
+ *
+ * The function will immediately return nullable if
+ *
+ * - An empty cell is found when resolving the multi-rows header
+ * - Neither `!ref` of the given worksheet is found, nor the `restriction` is given
+ * */
 export const head = (
   worksheet: WorkSheet,
   restriction?: Range,
