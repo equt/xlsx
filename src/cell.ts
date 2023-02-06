@@ -110,11 +110,11 @@ export const get = (
           ? { type: 'HERO', address, range: scope }
           : { type: 'DIRECT', address },
       )
-    if (type === 'MERGED') return // Not the hero of the merge
-    if (isNullable(scope)) return // Not in any merge
+    if (type === 'MERGED') return // Searching the hero of the merged, but this cell is not
+    if (isNullable(scope)) return // Not within any merged, and is undefined by itself
 
     const hero = iterate(scope).findMap(address => go(address, 'MERGED'))
-    if (isNullable(hero)) return // Umm, no hero in the merge?
+    if (isNullable(hero)) return // The merged has no hero
     return { ...hero, meta: { type: 'MERGED', address, range: scope } }
   }
 
