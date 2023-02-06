@@ -238,6 +238,23 @@ describe('collect', () => {
         ],
         { s: { r: 1, c: 0 }, e: { r: 1, c: 1 } },
       ),
-    ).toEqual([])
+    ).toEqual([
+      new Map([
+        [
+          [
+            {
+              type: 'string',
+              value: 'A1',
+              meta: { address: { r: 0, c: 0 }, type: 'DIRECT' },
+            },
+          ] as const,
+          {
+            type: 'string',
+            value: 'A2',
+            meta: { address: { r: 1, c: 0 }, type: 'DIRECT' },
+          },
+        ],
+      ]),
+    ])
   })
 })

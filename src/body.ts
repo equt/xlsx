@@ -26,8 +26,6 @@ export const collect = (
 ): Body =>
   iterate(restriction)
     .group((a, b) => a.r === b.r)
-    .filterMap(row =>
-      row.length === headers.length
-        ? new Map(headers.zip(row.map(address => get(worksheet, address))))
-        : undefined,
+    .map(
+      row => new Map(headers.zip(row.map(address => get(worksheet, address)))),
     )
