@@ -34,7 +34,7 @@
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
     "@equt/eslint-config": "^8.9.0",
-    "@equt/prelude": "^0.1.12",
+    "@equt/prelude": "^0.1.13",
     "@equt/prettier-config": "^2.5.1",
     "@equt/tsconfig": "^1.3.1",
     "@types/jest": "^29.4.0",
