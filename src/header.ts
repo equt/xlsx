@@ -38,6 +38,8 @@ export const head = (
   worksheet: WorkSheet,
   restriction?: Range,
 ): Nullable<Headers> => {
+  // Use the user specified restriction, or the !ref if not found.
+  // If neither was found, return early.
   const scope =
     restriction ??
     (() => {
@@ -46,6 +48,8 @@ export const head = (
     })()
   if (isNullable(scope)) return
 
+  // Found the first row representing the headers.
+  // Early return if not found.
   const primitive = iterate(scope)
     .group((a, b) => a.r === b.r)
     .findMap(row => {
@@ -54,25 +58,34 @@ export const head = (
     })
   if (isNullable(primitive)) return
 
+  // Search for possible children for one single header cell.
+  // If any process within this function failed, it failed at all.
   const spread = (header: Array<Cell>, cell: Cell): Nullable<Array<Cell>> => {
     header.push(cell)
     if (
       cell.meta.type === 'DIRECT' ||
+      // Specially, if a multi-cells header is merged in vertical, treat it as a DIRECT cell
       (cell.meta.type === 'HERO' && cell.meta.range.s.c === cell.meta.range.e.c)
     )
       return header
 
+    // The current cell is within a mult-columns range, children are required.
+
+    // Move the cursor one row down.
     const next = get(worksheet, {
       r: cell.meta.address.r + 1,
       c: cell.meta.address.c,
     })
     if (isNullable(next)) return
 
+    // Handle all children.
     const spreaded = spread(header, next)
     if (isNullable(spreaded)) return
+
     return header
   }
 
+  // Start from the first row, and succeed only all requirements are satisfied.
   const compound = primitive.map(
     cell => spread([], cell) as Nullable<NonEmptyArray<Cell>>,
   )
