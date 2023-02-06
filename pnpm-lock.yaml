@@ -4,7 +4,7 @@ specifiers:
   '@commitlint/cli': ^17.4.2
   '@commitlint/config-conventional': ^17.4.2
   '@equt/eslint-config': ^8.9.0
-  '@equt/prelude': ^0.1.13
+  '@equt/prelude': ^0.1.14
   '@equt/prettier-config': ^2.5.1
   '@equt/tsconfig': ^1.3.1
   '@types/jest': ^29.4.0
@@ -24,7 +24,7 @@ devDependencies:
   '@commitlint/cli': 17.4.2
   '@commitlint/config-conventional': 17.4.2
   '@equt/eslint-config': 8.9.0_4vsywjlpuriuw3tl5oq6zy5a64
-  '@equt/prelude': 0.1.13
+  '@equt/prelude': 0.1.14
   '@equt/prettier-config': 2.5.1_prettier@2.8.3
   '@equt/tsconfig': 1.3.1
   '@types/jest': 29.4.0
@@ -583,8 +583,8 @@ packages:
       - supports-color
     dev: true
 
-  /@equt/prelude/0.1.13:
-    resolution: {integrity: sha512-vILrP+Jw+hX+7AGC3EtH387z9VhTBl25lsGRzDYk5jDhvNvz2JIRVlLCcPQ/QJrTkaeTdyQ7kf2BnuCYzRQ7Vg==}
+  /@equt/prelude/0.1.14:
+    resolution: {integrity: sha512-jT8/6uIRA7QZ2gBhvsGn363wLF4iI0ASJ1PqlVM7XUyzJ630JLZZqv6VyjSSF0STujqXLUBBP5WM6qa+j5njhg==}
     dev: true
 
   /@equt/prettier-config/2.5.1_prettier@2.8.3:
@@ -1750,7 +1750,7 @@ packages:
     dependencies:
       caniuse-lite: 1.0.30001450
       electron-to-chromium: 1.4.286
-      node-releases: 2.0.9
+      node-releases: 2.0.10
       update-browserslist-db: 1.0.10_browserslist@4.21.5
     dev: true
 
@@ -3963,8 +3963,8 @@ packages:
     resolution: {integrity: sha512-O5lz91xSOeoXP6DulyHfllpq+Eg00MWitZIbtPfoSEvqIHdl5gfcY6hYzDWnj0qD5tz52PI08u9qUvSVeUBeHw==}
     dev: true
 
-  /node-releases/2.0.9:
-    resolution: {integrity: sha512-2xfmOrRkGogbTK9R6Leda0DGiXeY3p2NJpy4+gNCffdUvV6mdEJnaDEic1i3Ec2djAo8jWYoJMR5PB0MSMpxUA==}
+  /node-releases/2.0.10:
+    resolution: {integrity: sha512-5GFldHPXVG/YZmFzJvKK2zDSzPKhEp0+ZR5SVaoSag9fsL5YgHbUHDfnG5494ISANDcK4KwPXAx2xqVEydmd7w==}
     dev: true
 
   /normalize-package-data/2.5.0:
