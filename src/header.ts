@@ -6,7 +6,14 @@ import { Cell, get, iterate } from './cell'
  *
  * For more details, see the {@link head} function
  * */
-export type Headers = ReadonlyArray<ReadonlyNonEmptyArray<Cell>>
+export type Headers = ReadonlyArray<Header>
+
+/*
+ * Header represents a primitive or compound table header
+ *
+ * For more details, see the {@link head} function
+ */
+export type Header = ReadonlyNonEmptyArray<Cell>
 
 /**
  * Detect a possible header within the `restriction`
